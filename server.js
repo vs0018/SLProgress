@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const routes = require("./routes");
 
 
@@ -21,11 +20,6 @@ app.use(routes);
 //Connect to DB
 
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
