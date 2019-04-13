@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const epilogue = require('epilogue');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
-const routes = require("./routes");
+// const routes = require("./routes");
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
