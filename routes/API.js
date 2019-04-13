@@ -6,7 +6,7 @@ module.exports = function(app) {
   epilogue.initialize({ app, sequelize: db.sequelize });
 
   epilogue.resource({
-    model: Post,
+    model: db.Post,
     endpoints: ['/posts', '/posts/:id'],
   });
 };

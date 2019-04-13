@@ -2,6 +2,7 @@ require('dotenv').config({ path: 'client/.env.local' });
 
 const express = require("express");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
@@ -13,8 +14,9 @@ const app = express();
 
 // Define middleware here
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 
 app.use(async (req, res, next) => {
   try {
