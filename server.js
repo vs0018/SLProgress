@@ -2,7 +2,6 @@ require('dotenv').config({ path: 'client/.env.local' });
 
 const express = require("express");
 const cors = require('cors');
-const epilogue = require('epilogue');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
@@ -30,20 +29,16 @@ app.use(async (req, res, next) => {
 });
 
 
-var db = require("./models");
+var db = require('./models');
+
+// API routing
+require("./routes/API")(app);
+
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// Using Epiloque for REST endpoints and controllers
-epilogue.initialize({ app, sequelize: db.sequelize });
-
-epilogue.resource({
-  model: Post,
-  endpoints: ['/posts', '/posts/:id'],
-});
 
 
 const PORT = process.env.PORT || 3001;
