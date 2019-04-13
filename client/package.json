@@ -1,12 +1,15 @@
 {
-  "name": "mern",
+  "name": "slprogress",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:3000/",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@okta/jwt-verifier": "0.0.14",
     "@okta/okta-react": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
     "final-form": "^4.12.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",

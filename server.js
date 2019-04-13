@@ -1,4 +1,4 @@
-require('dotenv').config({ path: 'client/.env.local' });
+require('dotenv').config({ path: '.env.local' });
 
 const express = require("express");
 const cors = require('cors');
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, function() {
