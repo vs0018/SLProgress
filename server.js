@@ -2,11 +2,8 @@ require('dotenv').config({ path: 'client/.env.local' });
 
 const express = require("express");
 const cors = require('cors');
-const Sequelize = require('sequelize');
 const epilogue = require('epilogue');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
-
-// const routes = require("./routes");
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
@@ -33,26 +30,25 @@ app.use(async (req, res, next) => {
 });
 
 
-
-const database = new Sequelize({
-  host: 'localhost',
-  dialect: 'mysql'
-});
+var db = require("./models");
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Add routes, both API and view
-app.use(routes);
+// Using Epiloque for REST endpoints and controllers
+epilogue.initialize({ app, sequelize: db.sequelize });
 
-//Connect to DB
+epilogue.resource({
+  model: Post,
+  endpoints: ['/posts', '/posts/:id'],
+});
 
 
 const PORT = process.env.PORT || 3001;
 
-database.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, function() {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
   });
