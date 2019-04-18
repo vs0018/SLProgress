@@ -139,4 +139,4 @@ export default compose(
   withAuth,
   withRouter,
   withStyles(styles),
-)(SessionManager);
+)(ClientManager);

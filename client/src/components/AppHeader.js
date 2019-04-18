@@ -20,10 +20,10 @@ const AppHeader = ({ classes }) => (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="title" color="inherit">
-        My React App
+        SLProgress
       </Typography>
       <Button color="inherit" component={Link} to="/">Home</Button>
-      <Button color="inherit" component={Link} to="/posts">Posts Manager</Button>
+      <Button color="inherit" component={Link} to="/posts">Client Manager</Button>
       <div className={classes.flex} />
       <LoginButton />
     </Toolbar>
