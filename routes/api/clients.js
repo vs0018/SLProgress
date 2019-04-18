@@ -1,5 +1,5 @@
 const router = require("express").Router();
-var db = require("../models");
+var db = require("../../models");
 
   // GET route for getting all of the Clients
   router.get("/api/Clients/", function(req, res) {
@@ -22,7 +22,7 @@ var db = require("../models");
   });
 
   // Client route for saving a new Client
-  router.Client("/api/Clients", function(req, res) {
+  router.post("/api/Clients", function(req, res) {
     console.log(req.body);
     db.Client.create({
       firstName: req.body.fname,

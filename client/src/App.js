@@ -8,7 +8,7 @@ import {
 
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
-import PostsManager from './pages/SessionManager';
+import SessionManager from './pages/SessionManager';
 
 const styles = theme => ({
   main: {
