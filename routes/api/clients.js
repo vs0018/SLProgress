@@ -1,4 +1,3 @@
-// Requiring our Todo model
 var db = require("../models");
 
 // Routes
