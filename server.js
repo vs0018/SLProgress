@@ -2,6 +2,7 @@ require('dotenv').config({ path: '.env.local' });
 // const Sequelize = require('sequelize');
 // const epilogue = require('epilogue');
 const express = require("express");
+const routes = require("./routes");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
@@ -31,18 +32,13 @@ app.use(async (req, res, next) => {
   }
 });
 
-
-// var db = require('./models');
-
-// API routing
-// require("./routes/API")(app);
-
-
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// Add routes, both API
+app.use(routes);
 
 const PORT = process.env.PORT || 3000;
 
