@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
-  Client.associate = function(models) {
+  Client.associate = models => {
     Client.belongsTo(models.Clinician, {
       foreignKey: 'clinicianId',
 

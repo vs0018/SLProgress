@@ -4,7 +4,7 @@ const routes = require("./routes");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// Requiring our models for syncing
+// Requiring models for syncing
 var db = require("./models");
 
 const OktaJwtVerifier = require('@okta/jwt-verifier');

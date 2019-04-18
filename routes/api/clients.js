@@ -2,7 +2,7 @@ var db = require("../models");
 
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = (app) => {
 
   // GET route for getting all of the Clients
   app.get("/api/Clients/", function(req, res) {
