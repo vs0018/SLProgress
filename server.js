@@ -1,10 +1,12 @@
 require('dotenv').config({ path: '.env.local' });
-// const Sequelize = require('sequelize');
-// const epilogue = require('epilogue');
 const express = require("express");
 const routes = require("./routes");
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
+// Requiring our models for syncing
+var db = require("./models");
+
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
