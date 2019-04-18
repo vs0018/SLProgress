@@ -4,73 +4,73 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-  // GET route for getting all of the posts
-  app.get("/api/posts/", function(req, res) {
-    db.Post.findAll({})
-      .then(function(dbPost) {
-        res.json(dbPost);
+  // GET route for getting all of the Clients
+  app.get("/api/Clients/", function(req, res) {
+    db.Client.findAll({})
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 
-  // Get route for returning posts of a specific category
-  app.get("/api/posts/category/:category", function(req, res) {
-    db.Post.findAll({
+  // Get route for returning Clients of a specific category
+  app.get("/api/Clients/category/:category", function(req, res) {
+    db.Client.findAll({
       where: {
         category: req.params.category
       }
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 
-  // Get route for retrieving a single post
-  app.get("/api/posts/:id", function(req, res) {
-    db.Post.findOne({
+  // Get route for retrieving a single Client
+  app.get("/api/Clients/:id", function(req, res) {
+    db.Client.findOne({
       where: {
         id: req.params.id
       }
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 
-  // POST route for saving a new post
-  app.post("/api/posts", function(req, res) {
+  // Client route for saving a new Client
+  app.Client("/api/Clients", function(req, res) {
     console.log(req.body);
-    db.Post.create({
+    db.Client.create({
       title: req.body.title,
       body: req.body.body,
       category: req.body.category
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 
-  // DELETE route for deleting posts
-  app.delete("/api/posts/:id", function(req, res) {
-    db.Post.destroy({
+  // DELETE route for deleting Clients
+  app.delete("/api/Clients/:id", function(req, res) {
+    db.Client.destroy({
       where: {
         id: req.params.id
       }
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 
-  // PUT route for updating posts
-  app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body,
+  // PUT route for updating Clients
+  app.put("/api/Clients", function(req, res) {
+    db.Client.update(req.body,
       {
         where: {
           id: req.body.id
         }
       })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbClient) {
+        res.json(dbClient);
       });
   });
 };
