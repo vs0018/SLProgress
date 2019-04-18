@@ -25,9 +25,12 @@ var db = require("../models");
   router.Client("/api/Clients", function(req, res) {
     console.log(req.body);
     db.Client.create({
-      title: req.body.title,
-      body: req.body.body,
-      category: req.body.category
+      firstName: req.body.fname,
+      lastName: req.body.lname,
+      birthdate: req.body.birthdate,
+      site: req.body.site,
+      parentName: req.body.parname,
+      parentEmail: req.body.paremail
     })
       .then(function(dbClient) {
         res.json(dbClient);
