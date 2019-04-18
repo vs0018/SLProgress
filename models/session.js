@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   Session.associate = function(models) {
     Session.hasMany(models.Client, {
       foreignKey: 'clientId',
-      as: 'clients')
+      as: 'clients'
+    });
   };
   return Session;
 };
