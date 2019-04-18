@@ -1,31 +1,16 @@
+const router = require("express").Router();
 var db = require("../models");
 
-// Routes
-// =============================================================
-module.exports = (app) => {
-
   // GET route for getting all of the Clients
-  app.get("/api/Clients/", function(req, res) {
+  router.get("/api/Clients/", function(req, res) {
     db.Client.findAll({})
       .then(function(dbClient) {
         res.json(dbClient);
       });
   });
 
-  // Get route for returning Clients of a specific category
-  app.get("/api/Clients/category/:category", function(req, res) {
-    db.Client.findAll({
-      where: {
-        category: req.params.category
-      }
-    })
-      .then(function(dbClient) {
-        res.json(dbClient);
-      });
-  });
-
   // Get route for retrieving a single Client
-  app.get("/api/Clients/:id", function(req, res) {
+  router.get("/api/Clients/:id", function(req, res) {
     db.Client.findOne({
       where: {
         id: req.params.id
@@ -37,7 +22,7 @@ module.exports = (app) => {
   });
 
   // Client route for saving a new Client
-  app.Client("/api/Clients", function(req, res) {
+  router.Client("/api/Clients", function(req, res) {
     console.log(req.body);
     db.Client.create({
       title: req.body.title,
@@ -50,7 +35,7 @@ module.exports = (app) => {
   });
 
   // DELETE route for deleting Clients
-  app.delete("/api/Clients/:id", function(req, res) {
+  router.delete("/api/Clients/:id", function(req, res) {
     db.Client.destroy({
       where: {
         id: req.params.id
@@ -62,7 +47,7 @@ module.exports = (app) => {
   });
 
   // PUT route for updating Clients
-  app.put("/api/Clients", function(req, res) {
+  router.put("/api/Clients", function(req, res) {
     db.Client.update(req.body,
       {
         where: {
@@ -73,4 +58,5 @@ module.exports = (app) => {
         res.json(dbClient);
       });
   });
-};
+
+  module.exports = router;
