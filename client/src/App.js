@@ -8,7 +8,7 @@ import {
 
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
-import PostsManager from './pages/PostsManager';
+import PostsManager from './pages/SessionManager';
 
 const styles = theme => ({
   main: {
@@ -25,7 +25,7 @@ const App = ({ classes }) => (
     <AppHeader />
     <main className={classes.main}>
       <Route exact path="/" component={Home} />
-      <SecureRoute exact path="/posts" component={PostsManager} />
+      <SecureRoute exact path="/posts" component={SessionManager} />
       <Route path="/implicit/callback" component={ImplicitCallback} />
     </main>
   </Fragment>

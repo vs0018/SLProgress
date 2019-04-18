@@ -16,7 +16,7 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import moment from 'moment';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
-
+import API from "../utils/API"; 
 import PostEditor from '../components/PostEditor';
 
 const styles = theme => ({
@@ -34,16 +34,14 @@ const styles = theme => ({
   },
 });
 
-const API = process.env.REACT_APP_API || 'http://localhost:3001';
-
-class PostsManager extends Component {
+class SessionManager extends Component {
   state = {
     loading: true,
     posts: [],
   };
 
   componentDidMount() {
-    this.getPosts();
+    this.getClients();
   }
 
   async fetch(method, endpoint, body) {
@@ -63,8 +61,8 @@ class PostsManager extends Component {
     }
   }
 
-  async getPosts() {
-    this.setState({ loading: false, posts: await this.fetch('get', '/posts') });
+  async getClients() {
+    this.setState({ loading: false, posts: await this.fetch('get', '/clients') });
   }
 
   savePost = async (post) => {
@@ -75,7 +73,7 @@ class PostsManager extends Component {
     }
 
     this.props.history.goBack();
-    this.getPosts();
+    this.getClients();
   }
 
   async deletePost(post) {
@@ -99,7 +97,7 @@ class PostsManager extends Component {
 
     return (
       <Fragment>
-        <Typography variant="display1">Posts Manager</Typography>
+        <Typography variant="display1">Session Manager</Typography>
         {this.state.posts.length > 0 ? (
           <Paper elevation={1} className={classes.posts}>
             <List>
@@ -119,7 +117,7 @@ class PostsManager extends Component {
             </List>
           </Paper>
         ) : (
-          !this.state.loading && <Typography variant="subheading">No posts to display</Typography>
+          !this.state.loading && <Typography variant="subheading">No clients to display</Typography>
         )}
         <Button
           variant="fab"
@@ -141,4 +139,4 @@ export default compose(
   withAuth,
   withRouter,
   withStyles(styles),
-)(PostsManager);
+)(SessionManager);
