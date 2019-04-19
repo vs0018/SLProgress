@@ -13,10 +13,10 @@ import {
   ListItemSecondaryAction,
 } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
+import moment from 'moment';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
-import API from "../utils/API"; 
-import ClientReport from '../components/ClientReport';
+import API from "../utils/API";
 
 const styles = theme => ({
   posts: {
@@ -33,10 +33,10 @@ const styles = theme => ({
   },
 });
 
-class ClientManager extends Component {
+class AddClient extends Component {
   state = {
     loading: true,
-    clients: [],
+    posts: [],
   };
 
   componentDidMount() {
@@ -60,44 +60,34 @@ class ClientManager extends Component {
     }
   }
 
-  async getClients() {
-    this.setState({ loading: false, clients: await this.fetch('get', '/clients') });
-  }
-
-
-  async deleteClient(client) {
-    if (window.confirm(`Are you sure you want to delete "${client.fname}"'s profile`)) {
-      await this.fetch('delete', `/clients/${client.id}`);
-      this.getClients();
+  saveClient = async (client) => {
+    if (client.id) {
+      await this.fetch('put', `/clients/${client.id}`, client);
+    } else {
+      await this.fetch('post', '/clients', client);
     }
+
+    this.props.history.goBack();
+    this.getClients();
   }
-
-  renderClientReport = ({ match: { params: { id } } }) => {
-    if (this.state.loading) return null;
-    const client = find(this.state.clients, { id: Number(id) });
-
-    if (!client && id !== 'new') return <Redirect to="/clients" />;
-
-    return <ClientReport client={client} />;
-  };
 
   render() {
     const { classes } = this.props;
 
     return (
       <Fragment>
-        <Typography variant="display1">Client Manager</Typography>
-        {this.state.clients.length > 0 ? (
-          <Paper elevation={1} className={classes.clients}>
+        <Typography variant="display1">Add Client</Typography>
+        {this.state.posts.length > 0 ? (
+          <Paper elevation={1} className={classes.posts}>
             <List>
-              {orderBy(this.state.clients, ['updatedAt', 'title'], ['desc', 'asc']).map(post => (
-                <ListItem key={client.id} button component={Link} to={`/clients/${client.id}`}>
+              {orderBy(this.state.posts, ['updatedAt', 'title'], ['desc', 'asc']).map(post => (
+                <ListItem key={post.id} button component={Link} to={`/posts/${post.id}`}>
                   <ListItemText
-                    primary={client.lname}
-                    secondary={client.fname}
+                    primary={post.title}
+                    secondary={post.updatedAt && `Updated ${moment(post.updatedAt).fromNow()}`}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton onClick={() => this.deleteClient(client)} color="inherit">
+                    <IconButton onClick={() => this.deletePost(post)} color="inherit">
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
@@ -114,11 +104,11 @@ class ClientManager extends Component {
           aria-label="add"
           className={classes.fab}
           component={Link}
-          to="/clients/new"
+          to="/posts/new"
         >
           <AddIcon />
         </Button>
-        <Route exact path="/clients/:id" render={this.renderClientReport} />
+        <Route exact path="/posts/:id" render={this.renderPostEditor} />
       </Fragment>
     );
   }
@@ -128,4 +118,4 @@ export default compose(
   withAuth,
   withRouter,
   withStyles(styles),
-)(ClientManager);
+)(AddClient);
