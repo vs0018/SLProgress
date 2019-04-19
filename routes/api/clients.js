@@ -2,7 +2,7 @@ const router = require("express").Router();
 var db = require("../../models");
 
   // GET route for getting all of the Clients
-  router.get("/api/Clients/", function(req, res) {
+  router.get("/api/clients/", function(req, res) {
     db.Client.findAll({})
       .then(function(dbClient) {
         res.json(dbClient);
@@ -10,7 +10,7 @@ var db = require("../../models");
   });
 
   // Get route for retrieving a single Client
-  router.get("/api/Clients/:id", function(req, res) {
+  router.get("/api/clients/:id", function(req, res) {
     db.Client.findOne({
       where: {
         id: req.params.id
@@ -22,7 +22,7 @@ var db = require("../../models");
   });
 
   // Client route for saving a new Client
-  router.post("/api/Clients", function(req, res) {
+  router.post("/api/clients", function(req, res) {
     console.log(req.body);
     db.Client.create({
       firstName: req.body.fname,
@@ -38,7 +38,7 @@ var db = require("../../models");
   });
 
   // DELETE route for deleting Clients
-  router.delete("/api/Clients/:id", function(req, res) {
+  router.delete("/api/clients/:id", function(req, res) {
     db.Client.destroy({
       where: {
         id: req.params.id
@@ -50,7 +50,7 @@ var db = require("../../models");
   });
 
   // PUT route for updating Clients
-  router.put("/api/Clients", function(req, res) {
+  router.put("/api/clients", function(req, res) {
     db.Client.update(req.body,
       {
         where: {

@@ -8,7 +8,7 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
+    "seed": "node seeders/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
@@ -29,6 +29,7 @@
     "epilogue": "^0.7.1",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
+    "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "react-router-dom": "^5.0.0",
     "sequelize": "^5.3.5"

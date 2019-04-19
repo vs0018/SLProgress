@@ -61,13 +61,13 @@ class ClientManager extends Component {
   }
 
   async getClients() {
-    this.setState({ loading: false, clients: await this.fetch('get', '/clients') });
+    this.setState({ loading: false, clients: await this.fetch('get', 'api/clients') });
   }
 
 
   async deleteClient(client) {
     if (window.confirm(`Are you sure you want to delete "${client.fname}"'s profile`)) {
-      await this.fetch('delete', `/clients/${client.id}`);
+      await this.fetch('delete', `api/clients/${client.id}`);
       this.getClients();
     }
   }
