@@ -23,7 +23,7 @@ const AppHeader = ({ classes }) => (
         SLProgress
       </Typography>
       <Button color="inherit" component={Link} to="/">Home</Button>
-      <Button color="inherit" component={Link} to="/posts">Client Manager</Button>
+      <Button color="inherit" component={Link} to="/clients">Client Manager</Button>
       <div className={classes.flex} />
       <LoginButton />
     </Toolbar>

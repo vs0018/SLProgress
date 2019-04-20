@@ -39,29 +39,12 @@ class ClientManager extends Component {
     clients: [],
   };
 
-  componentDidMount() {
+ componentDidMount() {
     this.getClients();
   }
 
-  async fetch(method, endpoint, body) {
-    try {
-      const response = await fetch(`${API}${endpoint}`, {
-        method,
-        body: body && JSON.stringify(body),
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-          authorization: `Bearer ${await this.props.auth.getAccessToken()}`,
-        },
-      });
-      return await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async getClients() {
-    this.setState({ loading: false, clients: await this.fetch('get', 'api/clients') });
+    this.setState({ loading: false, clients: await API.getAllClients() })
   }
 
 
