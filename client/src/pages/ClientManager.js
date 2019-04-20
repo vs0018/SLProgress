@@ -90,7 +90,7 @@ class ClientManager extends Component {
         {this.state.clients.length > 0 ? (
           <Paper elevation={1} className={classes.clients}>
             <List>
-              {orderBy(this.state.clients, ['updatedAt', 'title'], ['desc', 'asc']).map(post => (
+              {orderBy(this.state.clients, ['updatedAt', 'title'], ['desc', 'asc']).map(client => (
                 <ListItem key={client.id} button component={Link} to={`/clients/${client.id}`}>
                   <ListItemText
                     primary={client.lname}
