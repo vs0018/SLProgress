@@ -40,19 +40,19 @@ class ClientManager extends Component {
     clients: [],
   };
 
-  async componentDidMount() {
-    this.getClients();
+  componentDidMount() {
+    this.loadClients();
   }
 
-  async getClients() {
-    try {
-      const response = await API.getAllClients();
-      const data = await response.json();
-      this.setState({ clients: data });
-    } catch (err) {
-      // handle error as needed
-    }
-  }
+  async loadClients() {
+    const token = await this.props.auth.getAccessToken();
+    console.log(token);
+    await API.getAllClients(token)
+      .then(res =>
+        this.setState({loading: false, clients: res.data})
+      )
+      .catch(err => console.log(err));
+  };
 
 
   // deleteClient(client) {
@@ -79,11 +79,11 @@ class ClientManager extends Component {
         {this.state.clients.length > 0 ? (
           <Paper elevation={1} className={classes.clients}>
             <List>
-              {orderBy(this.state.clients, ['updatedAt', 'title'], ['desc', 'asc']).map(client => (
+              {orderBy(this.state.clients, ['updatedAt'], ['desc', 'asc']).map(client => (
                 <ListItem key={client.id} button component={Link} to={`/clients/${client.id}`}>
                   <ListItemText
-                    primary={client.lname}
-                    secondary={client.fname}
+                    primary={client.lastName}
+                    secondary={client.firstName}
                   />
                   <ListItemSecondaryAction>
                     <IconButton onClick={() => this.deleteClient(client)} color="inherit">
