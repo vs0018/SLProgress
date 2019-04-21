@@ -23,9 +23,9 @@ import axios from 'axios';
   // },
 
   // Gets all clients
-  getAllClients: function() {
+  getAllClients: function(accesstoken) {
     // return this.execute("get", "/api/clients");
-    return axios.get("/api/clients");
+    return axios.get("/api/clients", { headers: { Authorization: "Bearer" + " " + accesstoken} });
   },
 
   // Gets a client with the given id

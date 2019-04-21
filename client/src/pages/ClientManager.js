@@ -39,12 +39,17 @@ class ClientManager extends Component {
     clients: [],
   };
 
+
  componentDidMount() {
     this.getClients();
   }
 
   getClients() {
-    API.getAllClients()
+    const accesstoken = this.props.auth.getAccessToken();
+    
+    console.log(accesstoken);
+
+    API.getAllClients(accesstoken)
     .then(res =>
       this.setState({ clients: res.data })
     )

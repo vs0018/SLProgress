@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fetchClient = () => {
   const defaultOptions = {
-    baseURL: process.env.REACT_APP_API_PATH,
+    baseURL: 'http://localhost:3001/',
     headers: {
       'Content-Type': 'application/json',
     },
