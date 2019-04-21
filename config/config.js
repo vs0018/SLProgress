@@ -6,6 +6,15 @@ module.exports = {
     "password": process.env.MYSQL_PASS,
     "database": process.env.MYSQL_DBNAME,
     "host": process.env.MYSQL_HOST,
+    "resourceServer": {
+      "oidc": {
+        "issuer": `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`
+      },
+      "assertClaims": {
+        "aud": "api://default",
+        "cid": process.env.REACT_APP_OKTA_CLIENT_ID
+      }
+    },
     "dialect": "mysql"
   },
   "test": {

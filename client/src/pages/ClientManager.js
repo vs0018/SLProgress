@@ -16,7 +16,7 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API"; 
-import ClientReport from '../components/ClientReport';
+// import ClientReport from '../components/ClientReport';
 
 const styles = theme => ({
   posts: {
@@ -33,44 +33,42 @@ const styles = theme => ({
   },
 });
 
+
 class ClientManager extends Component {
   state = {
     loading: true,
     clients: [],
   };
 
-
- componentDidMount() {
+  async componentDidMount() {
     this.getClients();
   }
 
-  getClients() {
-    const accesstoken = this.props.auth.getAccessToken();
-    
-    console.log(accesstoken);
-
-    API.getAllClients(accesstoken)
-    .then(res =>
-      this.setState({ clients: res.data })
-    )
-    .catch(err => console.log(err))
-  }
-
-
-  deleteClient(client) {
-    if (window.confirm(`Are you sure you want to delete "${client.fname}"'s profile`)) {
-        return API.deleteClient;
+  async getClients() {
+    try {
+      const response = await API.getAllClients();
+      const data = await response.json();
+      this.setState({ clients: data });
+    } catch (err) {
+      // handle error as needed
     }
   }
 
-  renderClientReport = ({ match: { params: { id } } }) => {
-    if (this.state.loading) return null;
-    const client = find(this.state.clients, { id: Number(id) });
 
-    if (!client && id !== 'new') return <Redirect to="/clients" />;
+  // deleteClient(client) {
+  //   if (window.confirm(`Are you sure you want to delete "${client.fname}"'s profile`)) {
+  //       return API.deleteClient;
+  //   }
+  // }
 
-    return <ClientReport client={client} />;
-  };
+  // renderClientReport = ({ match: { params: { id } } }) => {
+  //   if (this.state.loading) return null;
+  //   const client = find(this.state.clients, { id: Number(id) });
+
+  //   if (!client && id !== 'new') return <Redirect to="/clients" />;
+
+  //   return <ClientReport client={client} />;
+  // };
 
   render() {
     const { classes } = this.props;
@@ -115,8 +113,8 @@ class ClientManager extends Component {
   }
 }
 
-export default compose(
-  withAuth,
-  withRouter,
-  withStyles(styles),
-)(ClientManager);
+  export default compose(
+    withAuth,
+    withRouter,
+    withStyles(styles),
+  )(ClientManager);

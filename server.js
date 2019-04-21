@@ -3,36 +3,47 @@ const express = require("express");
 const routes = require("./routes");
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
-// Requiring models for syncing
+const OktaJwtVerifier = require('@okta/jwt-verifier');
 var db = require("./models");
 
-const OktaJwtVerifier = require('@okta/jwt-verifier');
-
+// Define middleware here
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
   issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
+  clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
+  assertClaims: {
+    aud: 'api://default',
+  },
 });
 
-const app = express();
+/**
+ * A simple middleware that asserts valid access tokens and sends 401 responses
+ * if the token is not present or fails validation.  If the token is valid its
+ * contents are attached to req.jwt
+ */
+function authenticationRequired(req, res, next) {
+  const authHeader = req.headers.authorization || '';
+  const match = authHeader.match(/Bearer (.+)/);
 
-// Define middleware here
+  if (!match) {
+    return res.status(401).end();
+  }
+
+  const accessToken = match[1];
+
+  return oktaJwtVerifier.verifyAccessToken(accessToken)
+    .then((jwt) => {
+      req.jwt = jwt;
+      next();
+    })
+    .catch((err) => {
+      res.status(401).send(err.message);
+    });
+}
+
+const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-app.use(async (req, res, next) => {
-  try {
-    if (!req.headers.authorization) throw new Error('Authorization header is required');
-
-    const accessToken = req.headers.authorization.trim().split(' ')[1];
-    await oktaJwtVerifier.verifyAccessToken(accessToken);
-    next();
-  } catch (error) {
-    next(error.message);
-  }
-});
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -40,6 +51,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API
+app.use(authenticationRequired);
 app.use(routes);
 
 const PORT = process.env.PORT || 3001;
