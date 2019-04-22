@@ -50,7 +50,8 @@ class ClientManager extends Component {
       .then(res => {
         console.log(res);
         this.setState({loading: false, clients: res.data});
-      });
+      })
+      .catch(err => console.log(err));
   };
 
 
@@ -60,7 +61,8 @@ class ClientManager extends Component {
         API.deleteClient(token, client.id)
         .then(res => {
           this.loadClients();
-        });
+        })
+        .catch(err => console.log(err));
     }
   }
 
