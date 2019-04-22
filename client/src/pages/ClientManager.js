@@ -16,7 +16,7 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API"; 
-// import ClientReport from '../components/ClientReport';
+import ClientReport from '../components/ClientReport';
 
 const styles = theme => ({
   posts: {
@@ -40,35 +40,38 @@ class ClientManager extends Component {
     clients: [],
   };
 
-  componentDidMount() {
-    this.loadClients();
+ componentDidMount() {
+    this.loadClients(); 
   }
 
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
-    console.log(token);
-    await API.getAllClients(token)
-      .then(res =>
-        this.setState({loading: false, clients: res.data})
-      )
-      .catch(err => console.log(err));
+    API.getAllClients(token)
+      .then(res => {
+        console.log(res);
+        this.setState({loading: false, clients: res.data});
+      });
   };
 
 
-  // deleteClient(client) {
-  //   if (window.confirm(`Are you sure you want to delete "${client.fname}"'s profile`)) {
-  //       return API.deleteClient;
-  //   }
-  // }
+  async deleteClient(client) {
+    const token = await this.props.auth.getAccessToken();
+    if (window.confirm(`Are you sure you want to delete "${client.firstName}"'s profile`)) {
+        API.deleteClient(token, client.id)
+        .then(res => {
+          this.loadClients();
+        });
+    }
+  }
 
-  // renderClientReport = ({ match: { params: { id } } }) => {
-  //   if (this.state.loading) return null;
-  //   const client = find(this.state.clients, { id: Number(id) });
+  renderClientReport = ({ match: { params: { id } } }) => {
+    if (this.state.loading) return null;
+    const client = find(this.state.clients, { id: Number(id) });
 
-  //   if (!client && id !== 'new') return <Redirect to="/clients" />;
+    if (!client && id !== 'new') return <Redirect to="/clients" />;
 
-  //   return <ClientReport client={client} />;
-  // };
+    return <ClientReport client={client} />;
+  };
 
   render() {
     const { classes } = this.props;

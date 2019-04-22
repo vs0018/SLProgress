@@ -13,7 +13,7 @@ import axios from 'axios';
 
   // Gets a client with the given id
   getOneClient: function(token, id) {
-    return axios.get("/api/clients" + id, { headers: {
+    return axios.get("/api/clients/" + id, { headers: {
       Authorization: `Bearer ${token}`
     }
   });
@@ -21,7 +21,6 @@ import axios from 'axios';
 
   // Gets all clients for session with the given id
   getSessionClients: function(token, id) {
-    // return this.execute("get", "/api/sessionclients/" + id);
     return axios.get("/api/sessionclients" + id, { headers: {
       Authorization: `Bearer ${token}`
     }
@@ -30,7 +29,7 @@ import axios from 'axios';
 
   // Deletes a client with the given id
   deleteClient: function(token, id) {
-    return axios.delete("/api/clients" + id, { headers: {
+    return axios.delete("/api/clients/" + id, { headers: {
       Authorization: `Bearer ${token}`
     }
   });

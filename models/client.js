@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
-  Client.associate = models => {
-    Client.belongsTo(models.Clinician, {
-      foreignKey: 'clinicianId',
+  // Client.associate = models => {
+  //   Client.belongsTo(models.Clinician, {
+  //     foreignKey: 'clinicianId',
 
-    });
-  };
+  //   });
+  // };
   return Client;
 };

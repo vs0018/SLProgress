@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     definition: DataTypes.TEXT,
     accuracy: DataTypes.INTEGER
   });
-  Goal.associate = function(models) {
-    Goal.belongsTo(models.Client, {
-      foreignKey: 'clientId'
-    });
-  };
+  // Goal.associate = function(models) {
+  //   Goal.belongsTo(models.Client, {
+  //     foreignKey: 'clientId'
+  //   });
+  // };
   return Goal;
 };

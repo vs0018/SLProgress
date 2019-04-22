@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   });
-  Session.associate = function(models) {
-    Session.hasMany(models.Client, {
-      foreignKey: 'clientId',
-      as: 'clients'
-    });
-  };
+  // Session.associate = function(models) {
+  //   Session.hasMany(models.Client, {
+  //     foreignKey: 'clientId',
+  //     as: 'clients'
+  //   });
+  // };
   return Session;
 };

@@ -56,7 +56,8 @@ app.use(routes);
 
 const PORT = process.env.PORT || 3001;
 
-db.sequelize.sync({ force: true }).then(() => {
+//removed {force: true} to prevent seeds from being erased each time
+db.sequelize.sync().then(() => {
   app.listen(PORT, function() {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
   });
