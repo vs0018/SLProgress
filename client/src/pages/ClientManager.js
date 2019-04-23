@@ -38,7 +38,7 @@ const styles = theme => ({
 class ClientManager extends Component {
   state = {
     loading: true,
-    clients: [],
+    clients: []
   };
 
  componentDidMount() {
@@ -113,12 +113,10 @@ class ClientManager extends Component {
           color="secondary"
           aria-label="add"
           className={classes.fab}
-          component={Link}
-          to="/clients/new"
+          onClick={this.renderAddClient}
         >
           <AddIcon />
         </Button>
-        <Route exact path="/clients/:id" render={this.renderAddClient} />
       </Fragment>
     );
   }
