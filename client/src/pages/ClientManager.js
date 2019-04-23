@@ -16,7 +16,8 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API"; 
-import ClientReport from '../components/ClientReport';
+import AddClient from '../components/AddClient';
+// import ClientCard from '../components/ClientCard';
 
 const styles = theme => ({
   posts: {
@@ -57,7 +58,7 @@ class ClientManager extends Component {
 
   async deleteClient(client) {
     const token = await this.props.auth.getAccessToken();
-    if (window.confirm(`Are you sure you want to delete "${client.firstName}"'s profile`)) {
+    if (window.confirm(`Are you sure you want to delete ${client.firstName}'s profile`)) {
         API.deleteClient(token, client.id)
         .then(res => {
           this.loadClients();
@@ -66,13 +67,18 @@ class ClientManager extends Component {
     }
   }
 
-  renderClientReport = ({ match: { params: { id } } }) => {
-    if (this.state.loading) return null;
-    const client = find(this.state.clients, { id: Number(id) });
+  saveClient = async (client) => {
+    const token = await this.props.auth.getAccessToken();
+    API.saveClient(token, client.id)
+      .then(res => {
+        this.props.history.goBack();
+        this.loadClients();
+      })
+      .catch(err => console.log(err));
+  }
 
-    if (!client && id !== 'new') return <Redirect to="/clients" />;
-
-    return <ClientReport client={client} />;
+  renderAddClient = () => {
+    return <AddClient onSave={this.saveClient}/>;
   };
 
   render() {
@@ -112,7 +118,7 @@ class ClientManager extends Component {
         >
           <AddIcon />
         </Button>
-        <Route exact path="/clients/:id" render={this.renderClientReport} />
+        <Route exact path="/clients/:id" render={this.renderAddClient} />
       </Fragment>
     );
   }

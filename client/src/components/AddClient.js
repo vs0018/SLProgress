@@ -31,8 +31,8 @@ const styles = theme => ({
   },
 });
 
-const PostEditor = ({ classes, post, onSave, history }) => (
-  <Form initialValues={post} onSubmit={onSave}>
+const AddClient = ({ classes, onSave, history }) => (
+  <Form onSubmit={onSave}>
     {({ handleSubmit }) => (
       <Modal
         className={classes.modal}
@@ -71,4 +71,4 @@ const PostEditor = ({ classes, post, onSave, history }) => (
 export default compose(
   withRouter,
   withStyles(styles),
-)(PostEditor);
+)(AddClient);
