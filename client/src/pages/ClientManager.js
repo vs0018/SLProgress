@@ -17,10 +17,10 @@ import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API"; 
 import AddClient from '../components/AddClient';
-// import ClientCard from '../components/ClientCard';
+import ClientCard from '../components/ClientCard';
 
 const styles = theme => ({
-  posts: {
+  clients: {
     marginTop: 2 * theme.spacing.unit,
   },
   fab: {
@@ -77,8 +77,13 @@ class ClientManager extends Component {
       .catch(err => console.log(err));
   }
 
-  renderAddClient = () => {
-    return <AddClient onSave={this.saveClient}/>;
+  renderClientModal = ({ match: { params: { id } } }) => {
+    if (this.state.loading) return null;
+    const client = find(this.state.clients, { id: Number(id) });
+
+    if (!client && id !== 'new') return <AddClient onSave={this.saveClient} />;
+
+    return <ClientCard client={client} />;
   };
 
   render() {
@@ -113,10 +118,12 @@ class ClientManager extends Component {
           color="secondary"
           aria-label="add"
           className={classes.fab}
-          onClick={this.renderAddClient}
+          component={Link}
+          to="/posts/new"
         >
           <AddIcon />
         </Button>
+        <Route exact path="/clients/:id" render={this.renderClientModal} />
       </Fragment>
     );
   }

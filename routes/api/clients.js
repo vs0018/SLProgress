@@ -25,8 +25,8 @@ var db = require("../../models");
   router.post("/", function(req, res) {
     console.log(req.body);
     db.Client.create({
-      firstName: req.body.fname,
-      lastName: req.body.lname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       birthdate: req.body.birthdate,
       site: req.body.site,
       parentName: req.body.parname,
