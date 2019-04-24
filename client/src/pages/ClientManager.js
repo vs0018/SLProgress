@@ -16,8 +16,8 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API"; 
+import ClientProfile from '../components/ClientProfile';
 import AddClient from '../components/AddClient';
-import ClientCard from '../components/ClientCard';
 
 const styles = theme => ({
   clients: {
@@ -41,7 +41,7 @@ class ClientManager extends Component {
     clients: []
   };
 
- componentDidMount() {
+  componentDidMount() {
     this.loadClients(); 
   }
 
@@ -54,7 +54,6 @@ class ClientManager extends Component {
       })
       .catch(err => console.log(err));
   };
-
 
   async deleteClient(client) {
     const token = await this.props.auth.getAccessToken();
@@ -70,11 +69,9 @@ class ClientManager extends Component {
   saveClient = async (client) => {
     const token = await this.props.auth.getAccessToken();
     API.saveClient(token, client.id)
-      .then(res => {
-        this.props.history.goBack();
-        this.loadClients();
-      })
       .catch(err => console.log(err));
+    this.props.history.goBack();
+    this.loadClients();
   }
 
   renderClientModal = ({ match: { params: { id } } }) => {
@@ -83,7 +80,7 @@ class ClientManager extends Component {
 
     if (!client && id !== 'new') return <AddClient onSave={this.saveClient} />;
 
-    return <ClientCard client={client} />;
+    return <ClientProfile client={client} />;
   };
 
   render() {
@@ -123,7 +120,8 @@ class ClientManager extends Component {
         >
           <AddIcon />
         </Button>
-        <Route exact path="/clients/:id" render={this.renderClientModal} />
+        <Route exact path="/clients/:id" component={ClientProfile} />
+        <Route exact path="/clients/add" component={AddClient} />
       </Fragment>
     );
   }

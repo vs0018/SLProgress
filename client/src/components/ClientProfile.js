@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { Form, Field } from 'react-final-form';
+import AddGoal from './AddGoal'
 
 const styles = theme => ({
   marginTop: {
@@ -14,13 +14,13 @@ const styles = theme => ({
   },
 });
 
-const AddClient = ({ classes, onSave, history }) => (
+const ClientProfile = ({ classes, client, history }) => (
   <Fragment>
-      <Typography variant="display1">Add New Client</Typography>
+      <Typography variant="display1">{client.firstName}'s Page</Typography>
   </Fragment>
 );
 
 export default compose(
   withRouter,
   withStyles(styles),
-)(AddClient);
+)(ClientProfile);
