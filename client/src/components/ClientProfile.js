@@ -20,7 +20,4 @@ const ClientProfile = ({ classes, client, history }) => (
   </Fragment>
 );
 
-export default compose(
-  withRouter,
-  withStyles(styles),
-)(ClientProfile);
+export default withStyles(styles)(ClientProfile);

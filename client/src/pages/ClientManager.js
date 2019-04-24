@@ -15,7 +15,7 @@ import {
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
-import API from "../utils/API"; 
+import API from "../utils/API";
 import ClientProfile from '../components/ClientProfile';
 import AddClient from '../components/AddClient';
 
