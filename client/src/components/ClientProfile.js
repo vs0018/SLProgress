@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withAuth } from '@okta/okta-react';
 import {
   withStyles,
   Button,
@@ -6,6 +7,7 @@ import {
 } from '@material-ui/core';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
+import API from "../utils/API";
 import AddGoal from './AddGoal'
 
 const styles = theme => ({
@@ -14,10 +16,32 @@ const styles = theme => ({
   },
 });
 
-const ClientProfile = ({ classes, client, history }) => (
-  <Fragment>
-      <Typography variant="display1">{client.firstName}'s Page</Typography>
-  </Fragment>
-);
+class ClientProfile extends Component {
+  state = {
+    client: {}
+  };
 
-export default withStyles(styles)(ClientProfile);
+  // When this component mounts, grab the book with the _id of this.props.match.params.id
+  async componentDidMount() {
+    const token = await this.props.auth.getAccessToken();
+    API.getOneClient(token, this.props.match.params.id)
+      .then(res => this.setState({ client: res.data }))
+      .catch(err => console.log(err));
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+    <Fragment>
+        <Typography variant="display1">{this.state.client.firstName}'s Page</Typography>
+    </Fragment>
+    );
+  }
+};
+
+export default compose(
+  withAuth,
+  withRouter,
+  withStyles(styles),
+)(ClientProfile);

@@ -116,12 +116,10 @@ class ClientManager extends Component {
           aria-label="add"
           className={classes.fab}
           component={Link}
-          to="/posts/new"
+          to="/clients/add"
         >
           <AddIcon />
         </Button>
-        <Route exact path="/clients/:id" component={ClientProfile} />
-        <Route exact path="/clients/add" component={AddClient} />
       </Fragment>
     );
   }

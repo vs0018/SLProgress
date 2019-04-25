@@ -8,6 +8,8 @@ import {
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
 import ClientManager from './pages/ClientManager';
+import ClientProfile from './components/ClientProfile';
+import AddClient from './components/AddClient';
 
 const styles = theme => ({
   main: {
@@ -25,6 +27,8 @@ const App = ({ classes }) => (
     <main className={classes.main}>
       <Route exact path="/" component={Home} />
       <SecureRoute exact path="/clients" component={ClientManager} />
+      <SecureRoute exact path="/clients/:id" component={ClientProfile} />
+      <SecureRoute exact path="/clients/add" component={AddClient} />
       <Route path="/implicit/callback" component={ImplicitCallback} />
     </main>
   </Fragment>
