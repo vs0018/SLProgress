@@ -8,8 +8,8 @@ import {
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
 import ClientManager from './pages/ClientManager';
-import ClientProfile from './components/ClientProfile';
-import AddClient from './components/AddClient';
+import ClientProfile from './pages/ClientProfile';
+import AddClient from './pages/AddClient';
 
 const styles = theme => ({
   main: {

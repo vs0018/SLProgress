@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withAuth } from '@okta/okta-react';
-import { withRouter, Route, Redirect, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   withStyles,
   Typography,
@@ -16,8 +16,6 @@ import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { find, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API";
-import ClientProfile from '../components/ClientProfile';
-import AddClient from '../components/AddClient';
 
 const styles = theme => ({
   clients: {
@@ -65,23 +63,6 @@ class ClientManager extends Component {
         .catch(err => console.log(err));
     }
   }
-
-  saveClient = async (client) => {
-    const token = await this.props.auth.getAccessToken();
-    API.saveClient(token, client.id)
-      .catch(err => console.log(err));
-    this.props.history.goBack();
-    this.loadClients();
-  }
-
-  renderClientModal = ({ match: { params: { id } } }) => {
-    if (this.state.loading) return null;
-    const client = find(this.state.clients, { id: Number(id) });
-
-    if (!client && id !== 'new') return <AddClient onSave={this.saveClient} />;
-
-    return <ClientProfile client={client} />;
-  };
 
   render() {
     const { classes } = this.props;
