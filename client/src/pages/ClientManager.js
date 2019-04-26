@@ -13,7 +13,7 @@ import {
   ListItemSecondaryAction,
 } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
-import { find, orderBy } from 'lodash';
+import { orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API";
 

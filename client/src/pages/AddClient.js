@@ -7,7 +7,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { compose } from 'recompose';
-import { withRouter, Route, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import API from "../utils/API";
 
