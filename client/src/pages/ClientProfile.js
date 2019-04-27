@@ -2,11 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { withAuth } from '@okta/okta-react';
 import {
   withStyles,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import API from "../utils/API";
+import ExpansionPanel from "../components/ExpansionPanel"
 
 const styles = theme => ({
   marginTop: {
@@ -38,6 +39,13 @@ class ClientProfile extends Component {
     return (
     <Fragment>
         <Typography variant="display1">{this.state.client.firstName}'s Page</Typography>
+        {this.state.goals.length ? (
+          <ExpansionPanel 
+            goals={this.state.goals}
+            />
+          ) : (
+            <Typography>No Goals to Display</Typography>
+          )}
     </Fragment>
     );
   }
