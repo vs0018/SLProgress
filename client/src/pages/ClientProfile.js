@@ -50,6 +50,7 @@ class ClientProfile extends Component {
               {this.state.goals.map(goal => (
                 <GoalPanel goal={goal} />
               ))}
+              <AddGoal />
             </div>
           ) : (
             <div className={classes.root}>
