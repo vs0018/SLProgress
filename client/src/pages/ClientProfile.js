@@ -7,9 +7,13 @@ import {
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import API from "../utils/API";
-import ExpansionPanel from "../components/ExpansionPanel"
+import GoalPanel from "../components/GoalPanel"
+import AddGoal from "../components/AddGoal"
 
 const styles = theme => ({
+  root: {
+    width: '100%',
+  },
   marginTop: {
     marginTop: 2 * theme.spacing.unit,
   }
@@ -36,17 +40,23 @@ class ClientProfile extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
     <Fragment>
         <Typography variant="display1">{this.state.client.firstName}'s Page</Typography>
-        {this.state.goals.length ? (
-          <ExpansionPanel 
-            goals={this.state.goals}
-            />
+          {this.state.goals.length ? (
+            <div className={classes.root}>
+              {this.state.goals.map(goal => (
+                <GoalPanel goal={goal} />
+              ))}
+            </div>
           ) : (
-            <Typography>No Goals to Display</Typography>
+            <div className={classes.root}>
+              <AddGoal />
+            </div>
           )}
-    </Fragment>
+    </ Fragment>
     );
   }
 };
