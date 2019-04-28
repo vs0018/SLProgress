@@ -55,24 +55,24 @@ class ClientManager extends Component {
       .catch(err => console.log(err));
   };
 
-  async deleteClient(client) {
-    const token = await this.props.auth.getAccessToken();
-    if (window.confirm(`Are you sure you want to delete ${client.firstName}'s profile`)) {
-        API.deleteClient(token, client.id)
-        .then(res => {
-          this.loadClients();
-        })
-        .catch(err => console.log(err));
-    }
-  };
+  // async deleteClient(client) {
+  //   const token = await this.props.auth.getAccessToken();
+  //   if (window.confirm(`Are you sure you want to delete ${client.firstName}'s profile`)) {
+  //       API.deleteClient(token, client.id)
+  //       .then(res => {
+  //         this.loadClients();
+  //       })
+  //       .catch(err => console.log(err));
+  //   }
+  // };
 
-  handleToggle = client => () => {
+  handleToggle = id => () => {
     const { checked } = this.state.checked;
-    const currentIndex = checked.indexOf(client.id);
+    const currentIndex = checked.indexOf(id);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(client.id);
+      newChecked.push(id);
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -92,7 +92,7 @@ class ClientManager extends Component {
           <Paper elevation={1} className={classes.clients}>
             <List>
               {orderBy(this.state.clients, ['updatedAt'], ['desc', 'asc']).map(client => (
-                <ListItem key={client.id} button component={Link} to={`/clients/${client.id}`}>
+                <ListItem key={client.id} button onClick={this.handleToggle(client.id)}>
                 <Checkbox
                     checked={this.state.checked.indexOf(client.id) !== -1}
                     tabIndex={-1}
@@ -103,7 +103,7 @@ class ClientManager extends Component {
                     secondary={client.firstName}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton onClick={() => this.deleteClient(client)} color="inherit">
+                    <IconButton component={Link} to={`/clients/${client.id}`} color="inherit">
                       <ChartIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
