@@ -2,13 +2,20 @@ import React, { Component, Fragment } from 'react';
 import { withAuth } from '@okta/okta-react';
 import {
   withStyles,
-  TextField,
   Button,
-  Typography
+  Typography,
+  Paper,
+  RadioGroup,
+  FormLabel,
+  MenuItem,
+  FormGroup,
+  FormControl,
+  FormControlLabel
 } from '@material-ui/core';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
+import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
 import API from "../utils/API";
 
 const styles = theme => ({

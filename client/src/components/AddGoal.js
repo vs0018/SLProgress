@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
+import {
+  withStyles,
+  Typography,
+  Button,
+  Divider,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  ExpansionPanelActions
+} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import API from "../utils/API";
 
 const styles = theme => ({
   heading: {
@@ -45,6 +51,13 @@ class AddGoal extends React.Component {
             eros, vitae egestas augue. Duis vel est augue.
           </Typography>
         </ExpansionPanelDetails>
+        <Divider />
+        <ExpansionPanelActions>
+          <Button size="small">Cancel</Button>
+          <Button size="small" color="primary">
+            Save
+          </Button>
+        </ExpansionPanelActions>
       </ExpansionPanel>
 
     );

@@ -24,6 +24,7 @@ const AppHeader = ({ classes }) => (
       </Typography>
       <Button color="inherit" component={Link} to="/">Home</Button>
       <Button color="inherit" component={Link} to="/clients">Client Manager</Button>
+      <Button color="inherit" component={Link} to="/session">Session Dashboard</Button>
       <div className={classes.flex} />
       <LoginButton />
     </Toolbar>

@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import ClientManager from './pages/ClientManager';
 import ClientProfile from './pages/ClientProfile';
 import AddClient from './pages/AddClient';
+import SessionDash from './pages/SessionDash';
 
 const styles = theme => ({
   main: {
@@ -29,6 +30,7 @@ const App = ({ classes }) => (
       <SecureRoute exact path="/clients" component={ClientManager} />
       <SecureRoute exact path="/clients/:id" component={ClientProfile} />
       <SecureRoute exact path="/clients/add" component={AddClient} />
+      <SecureRoute exact path="/session" component={SessionDash} />
       <Route path="/implicit/callback" component={ImplicitCallback} />
     </main>
   </Fragment>

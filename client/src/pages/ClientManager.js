@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Checkbox,
   Paper,
   List,
   ListItem,
@@ -36,12 +37,13 @@ const styles = theme => ({
 class ClientManager extends Component {
   state = {
     loading: true,
-    clients: []
+    clients: [],
+    checked: [0]
   };
 
   componentDidMount() {
     this.loadClients(); 
-  }
+  };
 
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
@@ -62,7 +64,23 @@ class ClientManager extends Component {
         })
         .catch(err => console.log(err));
     }
-  }
+  };
+
+  handleToggle = value => () => {
+    const { checked } = this.state.checked;
+    const currentIndex = checked.indexOf(client.id);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(client.id);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      checked: newChecked,
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -75,6 +93,11 @@ class ClientManager extends Component {
             <List>
               {orderBy(this.state.clients, ['updatedAt'], ['desc', 'asc']).map(client => (
                 <ListItem key={client.id} button component={Link} to={`/clients/${client.id}`}>
+                <Checkbox
+                    checked={this.state.checked.indexOf(client.id) !== -1}
+                    tabIndex={-1}
+                    disableRipple
+                  />
                   <ListItemText
                     primary={client.lastName}
                     secondary={client.firstName}

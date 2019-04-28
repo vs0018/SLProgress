@@ -21,7 +21,7 @@ import axios from 'axios';
 
   // Gets all clients for session with the given id
   getSessionClients: function(token, id) {
-    return axios.get("/api/sessionclients" + id, { headers: {
+    return axios.get("/api/session" + id, { headers: {
       Authorization: `Bearer ${token}`
     }
   });
@@ -46,6 +46,14 @@ import axios from 'axios';
   // Saves a client to the database
   saveClient: function(token, clientData) {
     return axios.post("/api/clients", clientData, { headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  },
+
+  // Adds a client to a session
+  addToSession: function(token, clientData) {
+    return axios.post("/api/session", clientData, { headers: {
       Authorization: `Bearer ${token}`
     }
   });
