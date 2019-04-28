@@ -13,7 +13,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from '@material-ui/core';
-import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
+import { Delete as DeleteIcon, Add as AddIcon, ShowChart as ChartIcon } from '@material-ui/icons';
 import { orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API";
@@ -66,7 +66,7 @@ class ClientManager extends Component {
     }
   };
 
-  handleToggle = value => () => {
+  handleToggle = client => () => {
     const { checked } = this.state.checked;
     const currentIndex = checked.indexOf(client.id);
     const newChecked = [...checked];
@@ -104,7 +104,7 @@ class ClientManager extends Component {
                   />
                   <ListItemSecondaryAction>
                     <IconButton onClick={() => this.deleteClient(client)} color="inherit">
-                      <DeleteIcon />
+                      <ChartIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>

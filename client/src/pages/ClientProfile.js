@@ -3,9 +3,13 @@ import { withAuth } from '@okta/okta-react';
 import {
   withStyles,
   Typography,
+  Button,
+  IconButton,
+  Fab
 } from '@material-ui/core';
+import { Delete as DeleteIcon } from '@material-ui/icons';
 import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import API from "../utils/API";
 import GoalPanel from "../components/GoalPanel"
 import AddGoal from "../components/AddGoal"
@@ -16,6 +20,15 @@ const styles = theme => ({
   },
   marginTop: {
     marginTop: 2 * theme.spacing.unit,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 3 * theme.spacing.unit,
+    right: 3 * theme.spacing.unit,
+    [theme.breakpoints.down('xs')]: {
+      bottom: 2 * theme.spacing.unit,
+      right: 2 * theme.spacing.unit,
+    },
   }
 });
 
@@ -39,6 +52,17 @@ class ClientProfile extends Component {
       .catch(err => console.log(err));
   }
 
+  async deleteClient(client) {
+    const token = await this.props.auth.getAccessToken();
+    if (window.confirm(`Are you sure you want to delete ${client.firstName}'s profile`)) {
+        API.deleteClient(token, client.id)
+        .then(res => {
+          return <Redirect to="/clients" />
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -57,6 +81,9 @@ class ClientProfile extends Component {
               <AddGoal />
             </div>
           )}
+        <Fab size="small" color="secondary" aria-label="Add" className={classes.fab}>
+          <DeleteIcon onClick={() => this.deleteClient(this.state.client)} />
+        </Fab>
     </ Fragment>
     );
   }
