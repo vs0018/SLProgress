@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Client = sequelize.define('Client', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -23,11 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
-  // Client.associate = models => {
-  //   Client.belongsTo(models.Clinician, {
-  //     foreignKey: 'clinicianId',
-
-  //   });
-  // };
+    Client.associate = models => {
+      Client.hasMany(models.Goal);
+    };
   return Client;
 };

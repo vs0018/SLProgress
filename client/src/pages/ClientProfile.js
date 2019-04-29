@@ -18,9 +18,9 @@ const styles = theme => ({
   root: {
     width: '100%',
   },
-  marginTop: {
-    marginTop: 2 * theme.spacing.unit,
-  },
+  // marginTop: {
+  //   marginTop: 2 * theme.spacing.unit,
+  // },
   fab: {
     position: 'absolute',
     bottom: 3 * theme.spacing.unit,
@@ -46,12 +46,6 @@ class ClientProfile extends Component {
       .catch(err => console.log(err));
   }
 
-  saveGoal = async (client) => {
-    const token = await this.props.auth.getAccessToken();
-    API.saveGoal(token, client.id)
-      .catch(err => console.log(err));
-  }
-
   async deleteClient(client) {
     const token = await this.props.auth.getAccessToken();
     if (window.confirm(`Are you sure you want to delete ${client.firstName}'s profile`)) {
@@ -71,10 +65,10 @@ class ClientProfile extends Component {
         <Typography variant="display1">{this.state.client.firstName}'s Page</Typography>
           {this.state.goals.length ? (
             <div className={classes.root}>
-              {this.state.goals.map(goal => (
-                <GoalPanel goal={goal} />
+              {this.state.goals.map((goal, index) => (
+                <GoalPanel goal={goal} index={index} />
               ))}
-              <AddGoal />
+              <AddGoal client={this.state.client} />
             </div>
           ) : (
             <div className={classes.root}>

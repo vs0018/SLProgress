@@ -9,13 +9,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       definition: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       accuracy: {
+        allowNull: false,
         type: Sequelize.INTEGER
+      },
+      client: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'clients',
+            key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

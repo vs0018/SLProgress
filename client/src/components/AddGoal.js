@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withAuth } from '@okta/okta-react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
 import {
   withStyles,
   Typography,
-  Button,
   Divider,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  ExpansionPanelActions
+  ExpansionPanelActions,
+  Button,
+  Paper,
+  RadioGroup,
+  FormLabel,
+  MenuItem,
+  FormGroup,
+  FormControl,
+  FormControlLabel
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Form, Field } from 'react-final-form';
+import { TextField, Checkbox, Radio, Select, Input } from 'final-form-material-ui';
 import API from "../utils/API";
 
 const styles = theme => ({
@@ -25,7 +37,8 @@ const styles = theme => ({
   },
 });
 
-class AddGoal extends React.Component {
+
+class AddGoal extends Component {
   state = {
     expanded: null,
   };
@@ -36,28 +49,46 @@ class AddGoal extends React.Component {
     });
   };
 
+  saveGoal = async (client) => {
+    const token = await this.props.auth.getAccessToken();
+    API.saveGoal(token, client.id)
+      .catch(err => console.log(err));
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, client } = this.props;
     const { expanded } = this.state;
 
     return (
-      <ExpansionPanel expanded={expanded === 'panel4'} onChange={this.handleChange('panel4')}>
+      <ExpansionPanel expanded={expanded === 'addPanel'} onChange={this.handleChange('addPanel')}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>Add New Goal</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-            eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
+          <Form onSubmit={this.saveGoal}>
+            {({ handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <Field
+                name="domain"
+                type="text"
+                component={TextField}
+                label="Domain"
+                margin="normal"
+                fullWidth
+                />
+                <Field 
+                name="password"
+                component={Input}
+                className="input"
+                type="password"
+                placeholder="Password"
+                />
+                <Button size="small" color="primary" type="submit">Save</Button>
+                <Button size="small">Cancel</Button>
+              </form>
+              )}
+          </Form>
         </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </ExpansionPanelActions>
       </ExpansionPanel>
 
     );

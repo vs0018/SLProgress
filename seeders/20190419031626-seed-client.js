@@ -21,7 +21,8 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     queryInterface.bulkDelete('Clients', [{
-      firstName :'John'
+      firstName : 'John',
+      firstName : 'Jane'
     }])
   }
 };

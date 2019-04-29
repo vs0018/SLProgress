@@ -1,14 +1,18 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Goal = sequelize.define('Goal', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
     title: DataTypes.STRING,
     definition: DataTypes.TEXT,
     accuracy: DataTypes.INTEGER
   });
-  // Goal.associate = function(models) {
-  //   Goal.belongsTo(models.Client, {
-  //     foreignKey: 'clientId'
-  //   });
-  // };
+    Goal.associate = function(models) {
+      Goal.hasOne(models.Client);
+    };
   return Goal;
 };

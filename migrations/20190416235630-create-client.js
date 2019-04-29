@@ -29,6 +29,15 @@ module.exports = {
       parentEmail: {
         type: Sequelize.STRING
       },
+      goal: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'goals',
+            key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

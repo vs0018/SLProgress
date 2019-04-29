@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { 
   withStyles,
@@ -24,7 +24,7 @@ const styles = theme => ({
   },
 });
 
-class GoalPanel extends React.Component {
+class GoalPanel extends Component {
   state = {
     expanded: null
   };
@@ -36,11 +36,11 @@ class GoalPanel extends React.Component {
   };
 
   render() {
-    const { classes, goal } = this.props;
+    const { classes, goal, index } = this.props;
     const { expanded } = this.state.expanded;
 
     return (
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+      <ExpansionPanel expanded={expanded === `panel${index}`} onChange={this.handleChange(`panel${index}`)}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>Goal</Typography>
           <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
