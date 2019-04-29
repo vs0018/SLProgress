@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   });
     Client.associate = models => {
       Client.hasMany(models.Goal);
+      Client.belongsTo(models.Clinicians);
     };
   return Client;
 };

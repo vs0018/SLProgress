@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     accuracy: DataTypes.INTEGER
   });
     Goal.associate = function(models) {
-      Goal.hasOne(models.Client);
+      Goal.belongsTo(models.Client);
     };
   return Goal;
 };

@@ -29,15 +29,13 @@ module.exports = {
       parentEmail: {
         type: Sequelize.STRING
       },
-      goal: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: 'goals',
-            key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
-      },
+      // clinicianId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //       model: 'Clinicians',
+      //       key: 'id'
+      //   }
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
