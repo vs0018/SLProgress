@@ -92,7 +92,7 @@ class ClientManager extends Component {
                     secondary={client.firstName}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton component={Link} to={`/clients/${client.id}`} color="inherit">
+                    <IconButton component={Link} to={`/clients/${client.id}`} color="inherit" classes={classes} >
                       <ChartIcon />
                     </IconButton>
                   </ListItemSecondaryAction>

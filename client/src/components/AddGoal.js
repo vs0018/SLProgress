@@ -35,6 +35,19 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  formContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  select: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
 });
 
 
@@ -49,9 +62,10 @@ class AddGoal extends Component {
     });
   };
 
-  saveGoal = async (client) => {
+  saveGoal = async (goal) => {
     const token = await this.props.auth.getAccessToken();
-    API.saveGoal(token, client.id)
+    const client = await this.props.client.id;
+    API.saveGoal(token, goal, client)
       .catch(err => console.log(err));
   }
 
@@ -65,23 +79,40 @@ class AddGoal extends Component {
           <Typography className={classes.heading}>Add New Goal</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Form onSubmit={this.saveGoal}>
+          <Form 
+            onSubmit={this.saveGoal}
+          >
             {({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className={classes.formContainer}>
                 <Field
-                name="domain"
-                type="text"
-                component={TextField}
-                label="Domain"
-                margin="normal"
-                fullWidth
+                  name="domain"
+                  type="text"
+                  className={classes.textField}
+                  component={TextField}
+                  label="Domain"
+                  margin="normal"
                 />
+                <Field
+                  name="city"
+                  label="Select city"
+                  formControlProps={{className: classes.select}}
+                  component={Select}
+                >
+                  <MenuItem value="London">
+                      London
+                  </MenuItem>
+                  
+                  <MenuItem value="Paris">
+                      Paris
+                  </MenuItem>
+                </Field>
                 <Field 
                 name="password"
                 component={Input}
                 className="input"
                 type="password"
                 placeholder="Password"
+                margin="normal"
                 />
                 <Button size="small" color="primary" type="submit">Save</Button>
                 <Button size="small">Cancel</Button>

@@ -18,9 +18,9 @@ const styles = theme => ({
   root: {
     width: '100%',
   },
-  // marginTop: {
-  //   marginTop: 2 * theme.spacing.unit,
-  // },
+  marginTop: {
+    marginTop: 2 * theme.spacing.unit,
+  },
   fab: {
     position: 'absolute',
     bottom: 3 * theme.spacing.unit,
@@ -66,13 +66,13 @@ class ClientProfile extends Component {
           {this.state.goals.length ? (
             <div className={classes.root}>
               {this.state.goals.map((goal, index) => (
-                <GoalPanel goal={goal} index={index} />
+                <GoalPanel goal={goal} index={index} classes={classes}/>
               ))}
-              <AddGoal client={this.state.client} />
+              <AddGoal client={this.state.client} classes={classes} />
             </div>
           ) : (
             <div className={classes.root}>
-              <AddGoal />
+              <AddGoal client={this.state.client} classes={classes} />
             </div>
           )}
         <Fab size="small" color="secondary" aria-label="Add" className={classes.fab}>
