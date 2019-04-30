@@ -12,8 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     accuracy: DataTypes.INTEGER,
     clientID: DataTypes.INTEGER
   });
-    // Goal.associate = function(models) {
-    //   Goal.belongsTo(models.Client);
-    // };
+    Goal.associate = function(models) {
+      Goal.belongsTo(models.Client, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    };
   return Goal;
 };

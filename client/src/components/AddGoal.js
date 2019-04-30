@@ -6,23 +6,15 @@ import { withRouter } from 'react-router-dom';
 import {
   withStyles,
   Typography,
-  Divider,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  ExpansionPanelActions,
   Button,
-  Paper,
-  RadioGroup,
-  FormLabel,
   MenuItem,
-  FormGroup,
-  FormControl,
-  FormControlLabel
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Form, Field } from 'react-final-form';
-import { TextField, Checkbox, Radio, Select, Input } from 'final-form-material-ui';
+import { TextField, Select, Input } from 'final-form-material-ui';
 import API from "../utils/API";
 
 const styles = theme => ({

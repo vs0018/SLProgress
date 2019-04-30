@@ -109,7 +109,7 @@ class ClientManager extends Component {
           aria-label="add"
           className={classes.fab}
           component={Link}
-          to="/clients/add"
+          to="/add"
         >
           <AddIcon />
         </Button>

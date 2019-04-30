@@ -16,19 +16,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      birthdate: {
-        allowNull: false,
-        type: Sequelize.DATEONLY
-      },
-      site: {
-        type: Sequelize.STRING
-      },
-      parentName: {
-        type: Sequelize.STRING
-      },
-      parentEmail: {
-        type: Sequelize.STRING
-      },
       // clinicianId: {
       //   type: Sequelize.INTEGER,
       //   references: {

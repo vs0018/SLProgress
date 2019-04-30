@@ -61,7 +61,10 @@ class GoalPanel extends Component {
           </div>
           <div className={classNames(classes.column, classes.helper)}>
             <Typography>
-              {goal.accuracy}
+              Goal accuracy: {goal.accuracy}%
+            </Typography>
+            <Typography>
+              Current accuracy: %
             </Typography>
           </div>
         </ExpansionPanelDetails>
