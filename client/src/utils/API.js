@@ -11,6 +11,14 @@ import axios from 'axios';
     });
   },
 
+  // Gets all goals of current client
+  getAllGoals: function(token, id) {
+      return axios.get("/api/goals/" + id, { headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
   // Gets a client with the given id
   getOneClient: function(token, id) {
     return axios.get("/api/clients/" + id, { headers: {
@@ -52,8 +60,8 @@ import axios from 'axios';
   },
 
   // Saves a new Goal to the database
-  saveGoal: function(token, goalData, clientId) {
-    return axios.post("/api/goals", goalData, clientId, { headers: {
+  saveGoal: function(token, goalData) {
+    return axios.post("/api/goals", goalData, { headers: {
       Authorization: `Bearer ${token}`
     }
   });

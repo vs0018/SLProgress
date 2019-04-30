@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { withAuth } from '@okta/okta-react';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { 
   withStyles,
   Typography,
@@ -19,6 +23,13 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+  }
 });
 
 class GoalPanel extends Component {
@@ -34,19 +45,25 @@ class GoalPanel extends Component {
 
   render() {
     const { classes, goal, index } = this.props;
-    const { expanded } = this.state.expanded;
+    const { expanded } = this.state;
 
     return (
-      <ExpansionPanel expanded={expanded === `panel${index}`} onChange={this.handleChange(`panel${index}`)}>
+      <ExpansionPanel expanded={expanded === `panel1`} onChange={this.handleChange(`panel1`)}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Goal</Typography>
-          <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+          <Typography className={classes.heading}>Goal #{index + 1}</Typography>
+          <Typography className={classes.secondaryHeading}>{goal.goalType}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography>
+          <div className={classes.column}>
+            <Typography>
+              {goal.desc}
+            </Typography>
+          </div>
+          <div className={classNames(classes.column, classes.helper)}>
+            <Typography>
+              {goal.accuracy}
+            </Typography>
+          </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
@@ -57,4 +74,8 @@ GoalPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(GoalPanel);
+export default compose(
+  withAuth,
+  withRouter,
+  withStyles(styles),
+)(GoalPanel);

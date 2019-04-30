@@ -42,7 +42,11 @@ class ClientProfile extends Component {
   async componentDidMount() {
     const token = await this.props.auth.getAccessToken();
     API.getOneClient(token, this.props.match.params.id)
-      .then(res => this.setState({ client: res.data }))
+      .then(res => {
+        this.setState({ client: res.data });
+         return API.getAllGoals(token, this.state.client.id);
+        })
+      .then(res => this.setState({ goals: res.data }))
       .catch(err => console.log(err));
   }
 
