@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     goalType: DataTypes.STRING,
     desc: DataTypes.TEXT,
     accuracy: DataTypes.INTEGER,
-    clientID: DataTypes.INTEGER
   });
     Goal.associate = function(models) {
       Goal.belongsTo(models.Client, {

@@ -4,13 +4,7 @@ import {
   withStyles,
   Button,
   Typography,
-  Paper,
-  RadioGroup,
-  FormLabel,
-  MenuItem,
-  FormGroup,
-  FormControl,
-  FormControlLabel
+  MenuItem
 } from '@material-ui/core';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
@@ -53,7 +47,7 @@ class AddClient extends Component {
 
   render() {
     const { classes, client } = this.props;
-    
+
     return (
       <Fragment>
         <Typography variant="display1">Add New Client</Typography>
@@ -64,46 +58,23 @@ class AddClient extends Component {
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Field
-                  name="goalType"
-                  label="Select Goal Type"
-                  formControlProps={{className: classes.select}}
-                  component={Select}
-                >
-                  <MenuItem value="Receptive">
-                      Receptive
-                  </MenuItem>
-                  
-                  <MenuItem value="Expressive">
-                      Expressive
-                  </MenuItem>
-                </Field>
-                <Field
-                  name="desc"
+                  name="firstName"
                   type="text"
                   className={classes.textField}
                   component={TextField}
-                  label="Goal Description"
+                  label="First Name"
                   fullWidth
                   margin="normal"
                 />
                 <Field
-                  name="accuracy"
-                  label="Select Accuracy"
-                  formControlProps={{className: classes.select}}
-                  component={Select}
-                >
-                  <MenuItem value={50}>
-                      50%
-                  </MenuItem>
-                  
-                  <MenuItem value={80}>
-                      80%
-                  </MenuItem>
-
-                  <MenuItem value={100}>
-                      100%
-                  </MenuItem>
-                </Field>
+                  name="lastName"
+                  type="text"
+                  className={classes.textField}
+                  component={TextField}
+                  label="Last Name"
+                  fullWidth
+                  margin="normal"
+                />
                 <Button size="small" color="primary" type="submit">Save</Button>
                 <Button size="small">Cancel</Button>
               </form>

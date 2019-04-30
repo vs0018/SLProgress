@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     }
   });
-    // Client.associate = models => {
-    //   Client.hasMany(models.Goal);
-    // };
+    Client.associate = models => {
+      Client.hasMany(models.Goal);
+    };
   return Client;
 };
