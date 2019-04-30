@@ -51,6 +51,14 @@ import axios from 'axios';
   });
   },
 
+  // Saves a new Goal to the database
+  saveGoal: function(token, goalData, clientId) {
+    return axios.post("/api/goals", goalData, clientId, { headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  },
+
   // Adds a client to a session
   addToSession: function(token, clientData) {
     return axios.post("/api/session", clientData, { headers: {

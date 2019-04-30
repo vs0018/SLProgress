@@ -8,16 +8,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      goalType: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      definition: {
+      desc: {
         allowNull: false,
         type: Sequelize.TEXT
       },
       accuracy: {
         allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      clientID: {
         type: Sequelize.INTEGER
       },
       // clientId: {

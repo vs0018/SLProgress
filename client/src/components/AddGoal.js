@@ -65,6 +65,7 @@ class AddGoal extends Component {
   saveGoal = async (goal) => {
     const token = await this.props.auth.getAccessToken();
     const client = await this.props.client.id;
+    console.log(goal, client);
     API.saveGoal(token, goal, client)
       .catch(err => console.log(err));
   }
@@ -81,39 +82,51 @@ class AddGoal extends Component {
         <ExpansionPanelDetails>
           <Form 
             onSubmit={this.saveGoal}
+            className={classes.formContainer}
           >
             {({ handleSubmit }) => (
-              <form onSubmit={handleSubmit} className={classes.formContainer}>
+              <form onSubmit={handleSubmit}>
                 <Field
-                  name="domain"
-                  type="text"
-                  className={classes.textField}
-                  component={TextField}
-                  label="Domain"
-                  margin="normal"
-                />
-                <Field
-                  name="city"
-                  label="Select city"
+                  name="goalType"
+                  label="Select Goal Type"
                   formControlProps={{className: classes.select}}
                   component={Select}
                 >
-                  <MenuItem value="London">
-                      London
+                  <MenuItem value="Receptive">
+                      Receptive
                   </MenuItem>
                   
-                  <MenuItem value="Paris">
-                      Paris
+                  <MenuItem value="Expressive">
+                      Expressive
                   </MenuItem>
                 </Field>
-                <Field 
-                name="password"
-                component={Input}
-                className="input"
-                type="password"
-                placeholder="Password"
-                margin="normal"
+                <Field
+                  name="desc"
+                  type="text"
+                  className={classes.textField}
+                  component={TextField}
+                  label="Goal Description"
+                  fullWidth
+                  margin="normal"
                 />
+                <Field
+                  name="accuracy"
+                  label="Select Accuracy"
+                  formControlProps={{className: classes.select}}
+                  component={Select}
+                >
+                  <MenuItem value={50}>
+                      50%
+                  </MenuItem>
+                  
+                  <MenuItem value={80}>
+                      80%
+                  </MenuItem>
+
+                  <MenuItem value={100}>
+                      100%
+                  </MenuItem>
+                </Field>
                 <Button size="small" color="primary" type="submit">Save</Button>
                 <Button size="small">Cancel</Button>
               </form>
@@ -130,4 +143,8 @@ AddGoal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AddGoal);
+export default compose(
+  withAuth,
+  withRouter,
+  withStyles(styles),
+)(AddGoal);

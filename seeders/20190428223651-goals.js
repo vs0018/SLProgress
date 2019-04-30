@@ -3,16 +3,18 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Goals', [{
-      title: "ID objects",
-      definition: "Given a verbal label, John will identify 5 common objects",
+      goalType: "ID objects",
+      desc: "Given a verbal label, John will identify 5 common objects",
       accuracy: 80,
+      clientID: 1,
       createdAt : new Date(),
       updatedAt : new Date()
     },
     {
-      title: "Name objects",
-      definition: "Given a concrete item, Jane will label 5 common objects",
+      goalType: "Name objects",
+      desc: "Given a concrete item, Jane will label 5 common objects",
       accuracy: 80,
+      clientID: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }

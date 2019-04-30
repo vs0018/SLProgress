@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    title: DataTypes.STRING,
-    definition: DataTypes.TEXT,
-    accuracy: DataTypes.INTEGER
+    goalType: DataTypes.STRING,
+    desc: DataTypes.TEXT,
+    accuracy: DataTypes.INTEGER,
+    clientID: DataTypes.INTEGER
   });
     // Goal.associate = function(models) {
     //   Goal.belongsTo(models.Client);

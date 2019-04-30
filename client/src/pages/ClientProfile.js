@@ -58,7 +58,7 @@ class ClientProfile extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, client } = this.props;
 
     return (
     <Fragment>
