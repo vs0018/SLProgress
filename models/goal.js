@@ -5,14 +5,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     title: DataTypes.STRING,
     definition: DataTypes.TEXT,
     accuracy: DataTypes.INTEGER
   });
-    Goal.associate = function(models) {
-      Goal.belongsTo(models.Client);
-    };
+    // Goal.associate = function(models) {
+    //   Goal.belongsTo(models.Client);
+    // };
   return Goal;
 };

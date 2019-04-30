@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING
   });
-  Clinician.associate = function(models) {
-    Clinician.hasMany(models.Client);
-  };
+  // Clinician.associate = function(models) {
+  //   Clinician.hasMany(models.Client);
+  // };
   return Clinician;
 };

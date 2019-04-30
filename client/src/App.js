@@ -28,8 +28,8 @@ const App = ({ classes }) => (
     <main className={classes.main}>
       <Route exact path="/" component={Home} />
       <SecureRoute exact path="/clients" component={ClientManager} />
-      <SecureRoute exact path="/clients/:id" component={ClientProfile} />
-      <SecureRoute exact path="/clients/add" component={AddClient} />
+      <SecureRoute path="/clients/:id" component={ClientProfile} />
+      <SecureRoute path="/clients/add" component={AddClient} />
       <SecureRoute exact path="/session" component={SessionDash} />
       <Route path="/implicit/callback" component={ImplicitCallback} />
     </main>

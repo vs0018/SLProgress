@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     firstName: {
       type: DataTypes.STRING,
@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
-    Client.associate = models => {
-      Client.hasMany(models.Goal);
-      Client.belongsTo(models.Clinicians);
-    };
+    // Client.associate = models => {
+    //   Client.hasMany(models.Goal);
+    //   Client.belongsTo(models.Clinician);
+    // };
   return Client;
 };
