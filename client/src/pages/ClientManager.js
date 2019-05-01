@@ -56,7 +56,7 @@ class ClientManager extends Component {
   };
 
   handleToggle = id => () => {
-    const { checked } = this.state.checked;
+    const { checked } = this.state;
     const currentIndex = checked.indexOf(id);
     const newChecked = [...checked];
 
@@ -110,6 +110,7 @@ class ClientManager extends Component {
           className={classes.fab}
           component={Link}
           to="/add"
+          clients={this.state.checked}
         >
           <AddIcon />
         </Button>

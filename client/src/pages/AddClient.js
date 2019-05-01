@@ -7,7 +7,7 @@ import {
   MenuItem
 } from '@material-ui/core';
 import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { TextField, Select } from 'final-form-material-ui';
 import API from "../utils/API";
@@ -42,6 +42,9 @@ class AddClient extends Component {
   saveClient = async (newClient) => {
     const token = await this.props.auth.getAccessToken();
     API.saveClient(token, newClient)
+      .then(res => {
+        return <Redirect to="/clients" />
+      })
       .catch(err => console.log(err));
   }
 

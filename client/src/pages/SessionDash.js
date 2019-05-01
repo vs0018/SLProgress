@@ -7,6 +7,7 @@ import {
   Divider
 } from '@material-ui/core';
 import BinaryButton from "../components/BinaryButton";
+import API from "../utils/API";
 
 const styles = theme => ({
   root: {
@@ -22,6 +23,20 @@ const styles = theme => ({
 });
 
 class SessionDash extends Component {
+  state = {
+    clients: [],
+  };
+
+  async componentDidMount() {
+    const token = await this.props.auth.getAccessToken();
+    API.getSessionClients(token)
+      .then(res => {
+        this.setState({ client: res.data });
+         return API.getAllGoals(token, this.state.client.id);
+        })
+      .then(res => this.setState({ goals: res.data }))
+      .catch(err => console.log(err));
+  }
 
   render() {
     const { classes } = this.props;
