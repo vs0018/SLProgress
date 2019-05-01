@@ -21,7 +21,7 @@ import axios from 'axios';
 
   // Gets a client with the given id
   getOneClient: function(token, id) {
-    return axios.get("/api/clients/" + id, { headers: {
+    return axios.get("/api/clients/id/" + id, { headers: {
       Authorization: `Bearer ${token}`
     }
   });
@@ -29,7 +29,7 @@ import axios from 'axios';
 
   // Gets all clients for session
   getSessionClients: function(token) {
-    return axios.get("/api/session", { headers: {
+    return axios.get("/api/clients/session", { headers: {
       Authorization: `Bearer ${token}`
     }
   });

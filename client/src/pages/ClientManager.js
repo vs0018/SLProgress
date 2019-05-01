@@ -41,20 +41,25 @@ class ClientManager extends Component {
     checked: [0]
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.loadClients();
   };
 
+  componentDidUpdate(state){
+    
+  };
 
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
     API.getAllClients(token)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         this.setState({loading: false, clients: res.data});
+
       })
       .catch(err => console.log(err));
   };
+
 
   handleToggle = id => () => {
     const { checked } = this.state;

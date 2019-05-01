@@ -10,10 +10,22 @@ var db = require("../../models");
   });
 
   // Get route for retrieving a single Client
-  router.get("/:id", function(req, res) {
+  router.get("/id/:id", function(req, res) {
     db.Client.findOne({
       where: {
         id: req.params.id
+      }
+    })
+      .then(function(dbClient) {
+        res.json(dbClient);
+      });
+  });
+
+  // GET route for getting all of the Clients in Session
+  router.get("/session", function(req, res) {
+    db.Client.findAll({
+      where: {
+        inSession: true
       }
     })
       .then(function(dbClient) {
