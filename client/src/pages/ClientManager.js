@@ -45,6 +45,7 @@ class ClientManager extends Component {
     this.loadClients(); 
   };
 
+  
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
     API.getAllClients(token)
@@ -55,6 +56,7 @@ class ClientManager extends Component {
       .catch(err => console.log(err));
   };
 
+
   handleToggle = id => () => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(id);
@@ -62,13 +64,31 @@ class ClientManager extends Component {
 
     if (currentIndex === -1) {
       newChecked.push(id);
+      var enroll = true;
+      this.enrollSession(id, enroll);
     } else {
       newChecked.splice(currentIndex, 1);
+      var enroll = false;
+      this.enrollSession(id, enroll);
     }
 
     this.setState({
       checked: newChecked,
     });
+  };
+
+
+  async enrollSession(id, enroll){
+    const token = await this.props.auth.getAccessToken();
+    
+    var clientData = {
+      clientId: id,
+      inSession: enroll
+    }
+
+    API.updateClient(token, clientData)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -110,7 +130,6 @@ class ClientManager extends Component {
           className={classes.fab}
           component={Link}
           to="/add"
-          clients={this.state.checked}
         >
           <AddIcon />
         </Button>

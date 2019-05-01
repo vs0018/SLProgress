@@ -44,8 +44,8 @@ import axios from 'axios';
   },
 
   // Updates a client with the given id
-  updateClient: function(token, id) {
-    return axios.put("/api/clients" + id, { headers: {
+  updateClient: function(token, clientData) {
+    return axios.put("/api/clients", clientData, { headers: {
       Authorization: `Bearer ${token}`
     }
   });

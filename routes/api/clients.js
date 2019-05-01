@@ -54,7 +54,7 @@ var db = require("../../models");
     db.Client.update(req.body,
       {
         where: {
-          id: req.body.id
+          id: req.body.clientId
         }
       })
       .then(function(dbClient) {

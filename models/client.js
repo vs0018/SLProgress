@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     lastName: {
       type: DataTypes.STRING,
       allowNull:false
-    }
+    },
+    inSession: {
+      allowNull: false,
+      defaultValue: false,
+      type: DataTypes.BOOLEAN
+    },
   });
     Client.associate = models => {
       Client.hasMany(models.Goal);

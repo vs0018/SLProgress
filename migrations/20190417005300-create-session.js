@@ -8,11 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      dayOfWeek: {
+      firstName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      date: {
-        type: Sequelize.DATE
+      lastName: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

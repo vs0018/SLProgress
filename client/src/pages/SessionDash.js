@@ -29,10 +29,7 @@ class SessionDash extends Component {
 
   async componentDidMount() {
   
-    this.setState((state, props) => ({
-      clients: state.clients + props.clients
-    }));
-  
+
   }
 
   render() {

@@ -16,13 +16,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      // clinicianId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //       model: 'Clinicians',
-      //       key: 'id'
-      //   }
-      // },
+      inSession: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
