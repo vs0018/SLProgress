@@ -25,10 +25,15 @@ const styles = theme => ({
   formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+    alignItems: 'baseline',
+    alignContent: 'center'
   },
   select: {
+    paddingLeft: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
     margin: theme.spacing.unit,
-    minWidth: 120,
+    marginTop: theme.spacing.unit * 2,
+    minWidth: 200,
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -38,28 +43,32 @@ const styles = theme => ({
 });
 
 class AddClient extends Component {
-
+  state = {
+    redirect: false
+  }
+  
   saveClient = async (newClient) => {
     const token = await this.props.auth.getAccessToken();
     API.saveClient(token, newClient)
-      .then(res => {
-        return <Redirect to="/clients" />
-      })
+      .then(() => this.setState({ redirect: true }))
       .catch(err => console.log(err));
   }
 
   render() {
     const { classes, client } = this.props;
+    const { redirect } = this.state;
 
+    if (redirect) {
+      return <Redirect to="/clients" />;
+    }
     return (
       <Fragment>
         <Typography variant="display1">Add New Client</Typography>
         <Form 
             onSubmit={this.saveClient}
-            className={classes.formContainer}
           >
             {({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
+              <form className={classes.formContainer} onSubmit={handleSubmit}>
                 <Field
                   name="firstName"
                   type="text"

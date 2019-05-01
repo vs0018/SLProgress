@@ -30,16 +30,16 @@ const styles = theme => ({
   formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+    alignItems: 'baseline'
   },
   content: {
-    display: 'flex',
-    alignItems: 'center',
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
   },
   select: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
+    paddingLeft: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    minWidth: 200,
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -89,10 +89,9 @@ class AddGoal extends Component {
         <ExpansionPanelDetails>
           <Form 
             onSubmit={this.saveGoal}
-            className={classes.formContainer}
           >
             {({ handleSubmit }) => (
-              <form className={classes.content} onSubmit={handleSubmit}>
+              <form className={classes.formContainer} onSubmit={handleSubmit}>
                 <Field
                   name="goalType"
                   label="Select Goal Type"

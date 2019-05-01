@@ -60,7 +60,7 @@ class ClientManager extends Component {
         return client.id
       });
       console.log(clients);
-      this.setState({checked: clients})
+      this.setState({checked: clients});
     });
   };
 
