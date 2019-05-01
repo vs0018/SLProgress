@@ -20,7 +20,7 @@ router.get("/:id", function(req, res) {
       goalType: req.body.goalType,
       desc: req.body.desc,
       accuracy: req.body.accuracy,
-      // clientID: req.body.clientId
+      ClientId: req.body.clientId
     })
       .then(function(dbGoal) {
         res.json(dbGoal);

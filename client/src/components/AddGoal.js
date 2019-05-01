@@ -57,8 +57,17 @@ class AddGoal extends Component {
   saveGoal = async (goal) => {
     const token = await this.props.auth.getAccessToken();
     const client = await this.props.client.id;
-    console.log(goal, client);
-    API.saveGoal(token, goal)
+    
+    var newGoal = {
+      goalType: goal.goalType,
+      desc: goal.desc,
+      accuracy: goal.accuracy,
+      clientId: client
+    };
+
+    console.log(newGoal);
+
+    API.saveGoal(token, newGoal)
       .catch(err => console.log(err));
   }
 
