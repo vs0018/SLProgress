@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import avatar from "../static/avatar.png"
 import PropTypes from 'prop-types';
 import { 
   withStyles,
@@ -23,7 +24,7 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   content: {
-    flex: '1 0 auto',
+    flex: '1 0 auto'
   },
   cover: {
     width: 151,
@@ -33,11 +34,7 @@ const styles = theme => ({
     alignItems: 'center',
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
+  }
 });
 
 function ClientCard(props) {
@@ -60,7 +57,7 @@ function ClientCard(props) {
       </div>
       <CardMedia
         className={classes.cover}
-        // image="/public/avatar-1577909_1280.png"
+        image={avatar}
         title="Client Image"
       />
     </Card>

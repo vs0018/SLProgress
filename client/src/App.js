@@ -11,8 +11,14 @@ import ClientManager from './pages/ClientManager';
 import ClientProfile from './pages/ClientProfile';
 import AddClient from './pages/AddClient';
 import SessionDash from './pages/SessionDash';
+import Background from './static/blue_abstract_background.jpg'
 
 const styles = theme => ({
+  root: {
+    backgroundImage: `url(${ Background })`,
+    backgroundSize: 'cover',
+    overflow: 'hidden',
+  },
   main: {
     padding: 3 * theme.spacing.unit,
     [theme.breakpoints.down('xs')]: {

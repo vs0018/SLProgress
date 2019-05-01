@@ -14,7 +14,7 @@ import {
   ListItemSecondaryAction,
 } from '@material-ui/core';
 import { Add as AddIcon, ShowChart as ChartIcon } from '@material-ui/icons';
-import { orderBy } from 'lodash';
+import { map, orderBy } from 'lodash';
 import { compose } from 'recompose';
 import API from "../utils/API";
 
@@ -42,22 +42,26 @@ class ClientManager extends Component {
   };
 
   async componentDidMount() {
-    this.loadClients();
-  };
-
-  componentDidUpdate(state){
-    
+    await this.loadClients()
   };
 
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
     API.getAllClients(token)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
         this.setState({loading: false, clients: res.data});
-
       })
       .catch(err => console.log(err));
+
+    API.getSessionClients(token)
+    .then(res => {
+      var clients = res.data.map(function(client){
+        return client.id
+      });
+      console.log(clients);
+      this.setState({checked: clients})
+    });
   };
 
 
@@ -69,12 +73,12 @@ class ClientManager extends Component {
     if (currentIndex === -1) {
       newChecked.push(id);
       var enroll = true;
-      this.enrollSession(id, enroll);
     } else {
       newChecked.splice(currentIndex, 1);
       var enroll = false;
-      this.enrollSession(id, enroll);
     }
+
+    this.enrollSession(id, enroll);
 
     this.setState({
       checked: newChecked,

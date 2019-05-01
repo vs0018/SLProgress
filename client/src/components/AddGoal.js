@@ -31,6 +31,12 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  content: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+  },
   select: {
     margin: theme.spacing.unit,
     minWidth: 120,
@@ -86,7 +92,7 @@ class AddGoal extends Component {
             className={classes.formContainer}
           >
             {({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
+              <form className={classes.content} onSubmit={handleSubmit}>
                 <Field
                   name="goalType"
                   label="Select Goal Type"
