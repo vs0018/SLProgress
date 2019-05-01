@@ -26,11 +26,7 @@ var db = require("../../models");
     console.log(req.body);
     db.Session.create({
       firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      birthdate: req.body.birthdate,
-      site: req.body.site,
-      parentName: req.body.parname,
-      parentEmail: req.body.paremail
+      lastName: req.body.lastName
     })
       .then(function(dbSession) {
         res.json(dbSession);

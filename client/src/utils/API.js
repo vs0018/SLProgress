@@ -27,9 +27,9 @@ import axios from 'axios';
   });
   },
 
-  // Gets all clients for session with the given id
-  getSessionClients: function(token, id) {
-    return axios.get("/api/session" + id, { headers: {
+  // Gets all clients for session
+  getSessionClients: function(token) {
+    return axios.get("/api/session", { headers: {
       Authorization: `Bearer ${token}`
     }
   });

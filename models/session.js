@@ -1,10 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define('Session', {
-    dayOfWeek: {
+    firstName: {
       type: DataTypes.STRING
     },
-    time: {
+    lastName: {
+      type: DataTypes.STRING
+    },
+    ClientId: {
       type: DataTypes.INTEGER
     }
   });
