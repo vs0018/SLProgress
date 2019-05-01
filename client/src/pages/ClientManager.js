@@ -42,10 +42,10 @@ class ClientManager extends Component {
   };
 
   componentDidMount() {
-    this.loadClients(); 
+    this.loadClients();
   };
 
-  
+
   async loadClients() {
     const token = await this.props.auth.getAccessToken();
     API.getAllClients(token)
@@ -55,7 +55,6 @@ class ClientManager extends Component {
       })
       .catch(err => console.log(err));
   };
-
 
   handleToggle = id => () => {
     const { checked } = this.state;
