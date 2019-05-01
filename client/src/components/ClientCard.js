@@ -41,7 +41,7 @@ const styles = theme => ({
 });
 
 function ClientCard(props) {
-  const { classes, theme, client } = props;
+  const { classes, client } = props;
 
   return (
     <Card className={classes.card}>
@@ -72,4 +72,4 @@ ClientCard.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ClientCard);
+export default withStyles(styles)(ClientCard);
